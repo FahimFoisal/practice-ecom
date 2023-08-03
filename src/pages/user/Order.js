@@ -3,7 +3,7 @@ import { useAuth } from '../../context/auth';
 import Jumbotron from '../../components/cards/Jumbotron';
 import UserMenu from '../../components/nav/UserMenu';
 
-const Dashboard = () => {
+const Order = () => {
     const [auth,setAuth] = useAuth();
     return (
         <>
@@ -14,10 +14,9 @@ const Dashboard = () => {
                         <UserMenu/>
                     </div>
                     <div className="col-md-9">
-                        <div className="bg-light p-3 h4">User Info</div>
+                        <div className="bg-light p-3 h4">Order</div>
                         <ul className="list-group">
-                            <li className="list-group-item">{auth?.user?.name}</li>
-                            <li className="list-group-item">{auth?.user?.email}</li>
+                            <li className="list-group-item">Ready for order ....</li>
                         </ul>
                     </div>
                 </div>
@@ -26,4 +25,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Order;

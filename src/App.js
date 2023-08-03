@@ -5,7 +5,14 @@ import Menu from './components/nav/Menu';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Dashboard from './pages/user/Dashboard';
+import Dashboard1 from './pages/admin/Dashboard';
 import PrivateRoute from './components/routes/PrivateRoute';
+import NotFound from './pages/NotFound/NotFound';
+import AdminRoute from './components/routes/AdminRoute';
+import Category from './pages/admin/Category';
+import Product from './pages/admin/Product';
+import Order from './pages/user/Order';
+import Profile from './pages/user/Profile';
 
 
 function App() {
@@ -18,8 +25,17 @@ function App() {
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/register" element={<Register/>}/>
         <Route path='/dashboard' element={<PrivateRoute/>}>
-          <Route path='' element={<Dashboard/>}></Route>
+          <Route path='user' element={<Dashboard/>}></Route>
+          <Route path='user/profile' element={<Profile/>}></Route>
+          <Route path='user/orders' element={<Order/>}></Route>
+          <Route path='secret' element={<NotFound/>}></Route>
         </Route>
+        <Route path='/dashboard' element={<AdminRoute/>}>
+          <Route path='admin' element={<Dashboard1/>}></Route>
+          <Route path='admin/category' element={<Category/>}></Route>
+          <Route path='admin/product' element={<Product/>}></Route>
+        </Route>
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
     </BrowserRouter>
   );

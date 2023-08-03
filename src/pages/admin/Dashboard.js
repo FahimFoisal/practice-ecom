@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAuth } from '../../context/auth';
+import AdminMenu from '../../components/nav/AdminMenu';
 import Jumbotron from '../../components/cards/Jumbotron';
-import UserMenu from '../../components/nav/UserMenu';
+import { useAuth } from '../../context/auth';
 
 const Dashboard = () => {
     const [auth,setAuth] = useAuth();
@@ -11,13 +11,14 @@ const Dashboard = () => {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
-                        <UserMenu/>
+                        <AdminMenu/>
                     </div>
                     <div className="col-md-9">
-                        <div className="bg-light p-3 h4">User Info</div>
+                        <div className="bg-light p-3 h4">Admin Info</div>
                         <ul className="list-group">
                             <li className="list-group-item">{auth?.user?.name}</li>
                             <li className="list-group-item">{auth?.user?.email}</li>
+                            <li className="list-group-item">{auth?.user?.role}</li>
                         </ul>
                     </div>
                 </div>

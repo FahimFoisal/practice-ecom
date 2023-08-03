@@ -18,9 +18,9 @@ import Loading from '../../components/routes/Loading';
 // };
 
 const Register = () => {
-    const [name, setName] = useState("Software Engineer");
-    const [email, setEmail] = useState("soft@gmail.com");
-    const [password, setPassword] = useState("123");
+    const [name, setName] = useState("admin");
+    const [email, setEmail] = useState("pr@gmail.adm");
+    const [password, setPassword] = useState("123456");
     const navigate = useNavigate();
     const [auth,setAuth] = useAuth();
 
@@ -28,7 +28,7 @@ const Register = () => {
         e.preventDefault();
         //console.log(`${process.env.REACT_APP_API}/register`)
         try {
-            const {data} = await axios.post(`${process.env.REACT_APP_API}/register`,{
+            const {data} = await axios.post(`/register`,{
                 name,email,password
             })
             console.log(data)
@@ -69,7 +69,6 @@ const Register = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-            <Loading/>
             {/* <Form className='m-auto'
                 name="basic"
                 labelCol={{

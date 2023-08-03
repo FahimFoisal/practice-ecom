@@ -3,17 +3,18 @@ import Jumbotron from '../../components/cards/Jumbotron';
 import axios from 'axios';
 import  toast  from 'react-hot-toast';
 import { useAuth } from '../../context/auth';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 const Login = () => {
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
+    const [email,setEmail] = useState("pr@gmail.com");
+    const [password,setPassword] = useState("123456");
     const [auth,setAuth] = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const {data} = await axios.post(`${process.env.REACT_APP_API}/login`,{
+            const {data} = await axios.post(`/login`,{
                 email,password
             });
             if (data?.error) {
@@ -23,7 +24,7 @@ const Login = () => {
                 localStorage.setItem('auth',JSON.stringify(data));
                 setAuth({...auth,user: data.user, token: data.token});
                 toast.success("Login Success!");
-                navigate("/");
+                navigate(location.state || `/dashboard/${auth?.user?.role === 1 ? "admin": "user"}`);
             }
         } 
         catch (err) {
