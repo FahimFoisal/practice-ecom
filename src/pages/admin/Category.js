@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/auth';
 import Jumbotron from '../../components/cards/Jumbotron';
 import AdminMenu from '../../components/nav/AdminMenu';
 import { Modal } from 'antd';
 import CategoryForm from '../../components/forms/CategoryForm';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const Category = () => {
     const [auth, setAuth] = useAuth();
@@ -14,14 +16,68 @@ const Category = () => {
     const [selected, setSelected] = useState(null);
     const [updatingName, setUpdatingName] = useState('');
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        loadCategories();
+      }, []);
+    
+      const loadCategories = async () => {
+        try {
+          const { data } = await axios.get("/categories");
+          setCategories(data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const {data} = await axios.post('/category', {name});
+            if (data?.error) {
+                toast.error(data.error);
+            }
+            else {
+                loadCategories();
+                setName('');
+                toast.success(`${name} category created!`);
+            }
+        } catch(err) {
+            toast.error('Category creation failed!')
+
+        }
     }
-    const handleUpdate = (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault();
+        try {
+            const {data} = await axios.put(`/category/${selected._id}`, {name: updatingName});
+            if (data?.error) {
+                toast.error(data?.error);
+            } else{
+                setVisible(false);
+                loadCategories();
+                setUpdatingName('');
+                setSelected(null);
+                toast.success(`Category Successfully Updated!`);
+            }
+        } catch (err) {
+                toast.error("Update Failed!", err)
+        }
     }
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         e.preventDefault();
+        try {
+            const {data} = await axios.delete(`/category/${selected._id}`);
+            if (data?.error) {
+                toast.error(data?.error);
+            } else{
+                setVisible(false);
+                loadCategories();
+                setSelected(null);
+                toast.success(`Category Successfully Deleted!`);
+            }
+        } catch (err) {
+                toast.error(err)
+        }
     }
 
     return (
@@ -38,7 +94,8 @@ const Category = () => {
                         <hr />
                         <div className='col'>
                             {
-                                categories?.map((c) =>{
+                                categories?.map((c) => (
+                                    
                                     <button key={c._id} className='btn btn-outline-success m-3' onClick={()=> {
                                         setVisible(true);
                                         setSelected(c);
@@ -46,11 +103,11 @@ const Category = () => {
                                     }}>
                                         {c.name}
                                     </button>
-                                })
+                                ))
                             }
                         </div>
                         <Modal
-                            visible={visible}
+                            open={visible}
                             onOk={() => setVisible(false)}
                             onCancel={() => setVisible(false)}
                             footer={null}
