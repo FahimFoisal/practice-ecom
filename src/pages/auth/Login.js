@@ -24,7 +24,7 @@ const Login = () => {
                 localStorage.setItem('auth',JSON.stringify(data));
                 setAuth({...auth,user: data.user, token: data.token});
                 toast.success("Login Success!");
-                navigate(location.state || `/dashboard/${auth?.user?.role === 1 ? "admin": "user"}`);
+                navigate(location.state || `/dashboard/${data?.user?.role === 1 ? "admin": "user"}`);
             }
         } 
         catch (err) {
