@@ -34,6 +34,7 @@ function App() {
           <Route path='admin' element={<Dashboard1/>}></Route>
           <Route path='admin/category' element={<Category/>}></Route>
           <Route path='admin/product' element={<Product/>}></Route>
+          <Route path='admin/products' element={<Product/>}></Route>
         </Route>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
