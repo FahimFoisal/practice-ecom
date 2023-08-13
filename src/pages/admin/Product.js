@@ -28,7 +28,7 @@ const Product = () => {
                             <label for="formFile" class="btn btn-primary col-12">{photo ? photo.name: "Upload Photo"}<input onChange={(e)=>setPhoto(e.target.files[0])} hidden type="file" id="formFile" /></label>
 
                         </div>
-
+                        <p>yeah</p>
                         <Select
                             showSearch
                             style={{ width: 200 }}
