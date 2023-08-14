@@ -13,6 +13,7 @@ import Category from './pages/admin/Category';
 import Product from './pages/admin/Product';
 import Order from './pages/user/Order';
 import Profile from './pages/user/Profile';
+import Products from './pages/admin/Products';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
           <Route path='admin' element={<Dashboard1/>}></Route>
           <Route path='admin/category' element={<Category/>}></Route>
           <Route path='admin/product' element={<Product/>}></Route>
-          <Route path='admin/products' element={<Product/>}></Route>
+          <Route path='admin/products' element={<Products/>}></Route>
         </Route>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
