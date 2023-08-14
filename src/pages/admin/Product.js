@@ -5,6 +5,7 @@ import AdminMenu from "../../components/nav/AdminMenu";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
 import toast from "react-hot-toast"
+import { useNavigate } from "react-router";
 const { Option } = Select;
 
 const Product = () => {
@@ -17,6 +18,8 @@ const Product = () => {
   const [category,setCategory] = useState('');
   const [quantity,setQuantity] = useState('');
   const [shipping,setShipping] = useState('');
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadCategories();
@@ -48,7 +51,8 @@ const Product = () => {
             toast.error(data.error);
         }
         else{
-            toast.success(`${data.name} is created`)
+            toast.success(`${data.name} is created`);
+            navigate('/dashboard/admin/products');
         }
     } catch(err) {
         toast.error("Product created failed")
