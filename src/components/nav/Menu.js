@@ -37,6 +37,9 @@ const Menu = () => {
                 <li className='nav-item'>
                     <NavLink className="nav-link" aria-current="page" to="/dashboard/secret">Secret</NavLink>
                 </li>
+                <li className='nav-item'>
+                    <NavLink className="nav-link" aria-current="page" to="/shop">Shop</NavLink>
+                </li>
                 {
                     (!auth?.user) ? <>
                         <li className='nav-item'>

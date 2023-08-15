@@ -15,6 +15,7 @@ import Order from './pages/user/Order';
 import Profile from './pages/user/Profile';
 import Products from './pages/admin/Products';
 import ProductUpdate from './pages/admin/ProductUpdate';
+import Shop from './pages/Shop';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Home/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/shop" element={<Shop/>}/>
         <Route path='/dashboard' element={<PrivateRoute/>}>
           <Route path='user' element={<Dashboard/>}></Route>
           <Route path='user/profile' element={<Profile/>}></Route>
