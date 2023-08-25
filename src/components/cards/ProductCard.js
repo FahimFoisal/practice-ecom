@@ -1,7 +1,9 @@
 import React from "react";
 import { Badge, Card, Space } from 'antd';
+import { useNavigate } from "react-router";
 
 const ProductCard = ({ p }) => {
+  const navigate = useNavigate();
     <Space
     direction="vertical"
     size="middle"
@@ -29,10 +31,10 @@ const ProductCard = ({ p }) => {
             currency: "USD",
           })}</h4>
           <div className="d-flex justify-content-between">
-            <a href="#" className="btn btn-primary">
-              View Cart
+            <a className="btn btn-primary" onClick={(e) => navigate(`/product/${p.slug}`)}>
+              View Product
             </a>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary">
                 Add to Cart
             </a>
           </div>

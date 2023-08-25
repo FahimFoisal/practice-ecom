@@ -17,6 +17,7 @@ import Products from './pages/admin/Products';
 import ProductUpdate from './pages/admin/ProductUpdate';
 import Shop from './pages/Shop';
 import Search from './pages/Search';
+import ProductView from './ProductView';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/shop" element={<Shop/>}/>
         <Route path="/search" element={<Search/>}/>
+        <Route path="/product/:slug" element={<ProductView/>}/>
         <Route path='/dashboard' element={<PrivateRoute/>}>
           <Route path='user' element={<Dashboard/>}></Route>
           <Route path='user/profile' element={<Profile/>}></Route>
