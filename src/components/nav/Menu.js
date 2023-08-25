@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import { DownOutlined, SmileOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
+import SearchForm from '../forms/SearchForm';
 
 
 const Menu = () => {
@@ -40,6 +41,7 @@ const Menu = () => {
                 <li className='nav-item'>
                     <NavLink className="nav-link" aria-current="page" to="/shop">Shop</NavLink>
                 </li>
+                <SearchForm></SearchForm>
                 {
                     (!auth?.user) ? <>
                         <li className='nav-item'>
