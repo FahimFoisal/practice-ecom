@@ -7,14 +7,48 @@ import ProductCard from "../components/cards/ProductCard";
 const Home = () => {
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
+  const [page,setPage] = useState(1);
+  const [loading,setLoading] = useState(false);
+  const [total, setTotal] = useState(0);
 
   const arr = [...products];
   const sortedBySold = arr.sort((a,b)=> (a.sold < b.sold  ? 1:-1));
 
   const loadProducts = async () => {
-    const { data } = await axios.get("/products");
+    const { data } = await axios.get(`/list-products/${page}`);
     setProducts(data);
   };
+
+  const getTotal = async () => {
+    try {
+      const {data} = await axios.get('/products-count');
+      setTotal(data);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  const loadMore = async () => {
+    try{
+      setLoading(true);
+      const {data} = await axios.get(`/list-products/${page}`);
+      setProducts([...products,...data]);
+      setLoading(false);
+    } catch(err) {
+        console.log(err);
+        setLoading(false);
+    }
+  }
+
+  useEffect(()=> {
+    getTotal();
+    loadMore();
+  },[]);
+
+  useEffect(() => {
+    if (page === 1) return;
+    loadMore();
+  },[page]);
 
   useEffect(() => {
     loadProducts();
@@ -43,6 +77,13 @@ const Home = () => {
                     </div>))
                 }
             </div>
+        </div>
+        <div className="container text-center">
+          {
+            (products && products.length < total && <button className="col-md-6 btn btn-warning mt-3" onClick={(e)=>{e.preventDefault(); setPage(page+1);}} disabled={loading}>
+                {loading ? "Loading..." : "Load More"}
+              </button>)
+          }
         </div>
       </div>
     </>
