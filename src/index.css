@@ -15,6 +15,9 @@ code {
 .active {
   text-decoration: underline;
 }
+.deactive {
+  text-decoration: none !important;
+}
 
 .form-control {
   box-shadow: none !important;
